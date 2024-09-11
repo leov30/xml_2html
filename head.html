@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table with Images</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+			vertical-align: center;
+        }
+        img {
+            width: 300px; /* Adjust size as needed */
+            height: 300px;
+        }
+    </style>
+	
+	<script language="Javascript">
+
+            function download(filename, text){
+
+                var pom = document.createElement('a');
+                pom.style.display = 'none';
+                document.body.appendChild(pom);
+
+                pom.setAttribute('download', filename);
+                pom.setAttribute('href', 'data:text/plain;charset=utf-8,'
+                    + encodeURIComponent(text));
+
+                pom.click();
+                document.body.removeChild(pom);
+
+            }
+
+            function addTextTXT(){
+                if(document.addtext.filename.value.substr(-4).toLowerCase() != ".txt"){
+                    document.addtext.filename.value += ".txt"
+                }
+            }
+
+            function downloadData(formElement){
+                var text = "";
+
+                for(var i=0; i<formElement.length; i++){
+                    var input = formElement[i];
+					
+					if(input.type =="checkbox") {
+						
+						text += (input.checked ? input.name + "\n": "") ;
+						
+					}
+
+                }
+                download(formElement.filename, text);
+                return false;
+            }
+</script>
+	
+</head>
+<body>
